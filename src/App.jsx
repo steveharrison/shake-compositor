@@ -72,7 +72,13 @@ export default function App() {
     [],
   );
   const onConnect = useCallback(
-    (c) => setEdges((e) => addEdge({ ...c, animated: true }, e)),
+    (c) =>
+      setEdges((e) => {
+        const filtered = e.filter(
+          (ed) => !(ed.target === c.target && ed.targetHandle === c.targetHandle),
+        );
+        return addEdge({ ...c, animated: true }, filtered);
+      }),
     [],
   );
 
